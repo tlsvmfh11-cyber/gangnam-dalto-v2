@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Allow: /images/
 
-Sitemap: https://gangnam-dalto.com/sitemap.xml
+Disallow: /node_modules/
+Disallow: /*.js$
+
+Sitemap: https://www.dlatogyeongwook.com/sitemap.xml
+
+Host: https://www.dlatogyeongwook.com

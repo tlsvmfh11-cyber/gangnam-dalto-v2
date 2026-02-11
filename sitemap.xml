@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://gangnam-dalto.com/</loc>
+    <loc>https://www.dlatogyeongwook.com/</loc>
     <lastmod>2026-02-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.dlatogyeongwook.com/images/dalto-hero.webp</image:loc>
+      <image:title>강남 달토 프리미엄 가라오케 대표 이미지</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dlatogyeongwook.com/images/dalto-about.webp</image:loc>
+      <image:title>강남 달토 달리는토끼 매장 분위기 안내</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dlatogyeongwook.com/images/dalto-reservation.webp</image:loc>
+      <image:title>강남 달토 예약 시스템 안내</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dlatogyeongwook.com/images/dalto-choice-system.webp</image:loc>
+      <image:title>강남 달토 초이스 시스템 안내</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dlatogyeongwook.com/images/dalto-pricing.webp</image:loc>
+      <image:title>강남 달토 투명한 가격 구조 안내</image:title>
+    </image:image>
   </url>
 </urlset>
