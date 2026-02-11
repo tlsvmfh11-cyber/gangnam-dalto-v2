@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gangnam-dalto.com/sitemap.xml
