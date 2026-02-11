@@ -192,6 +192,26 @@
   --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
+/* ===== Copy Protection ===== */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
+@media print {
+  body { display: none !important; }
+}
+
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -1215,6 +1235,136 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+// ===== 복사 방지 & 개발자도구 방지 =====
+(function() {
+  // 1. 우클릭 차단
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // 2. 텍스트 선택 차단 (CSS + JS)
+  document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // 3. 복사 / 잘라내기 / 붙여넣기 차단
+  document.addEventListener('copy', function(e) { e.preventDefault(); return false; });
+  document.addEventListener('cut', function(e) { e.preventDefault(); return false; });
+  document.addEventListener('paste', function(e) { e.preventDefault(); return false; });
+
+  // 4. 드래그 차단
+  document.addEventListener('dragstart', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // 5. 키보드 단축키 차단
+  document.addEventListener('keydown', function(e) {
+    // F12 (개발자도구)
+    if (e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault(); return false;
+    }
+    // Ctrl+Shift+I (요소 검사)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.keyCode === 73)) {
+      e.preventDefault(); return false;
+    }
+    // Ctrl+Shift+J (콘솔)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j' || e.keyCode === 74)) {
+      e.preventDefault(); return false;
+    }
+    // Ctrl+Shift+C (요소 선택)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c' || e.keyCode === 67)) {
+      e.preventDefault(); return false;
+    }
+    // Ctrl+U (소스보기)
+    if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.keyCode === 85)) {
+      e.preventDefault(); return false;
+    }
+    // Ctrl+S (페이지 저장)
+    if (e.ctrlKey && (e.key === 'S' || e.key === 's' || e.keyCode === 83)) {
+      e.preventDefault(); return false;
+    }
+    // Ctrl+A (전체 선택)
+    if (e.ctrlKey && (e.key === 'A' || e.key === 'a' || e.keyCode === 65)) {
+      e.preventDefault(); return false;
+    }
+    // Ctrl+P (인쇄)
+    if (e.ctrlKey && (e.key === 'P' || e.key === 'p' || e.keyCode === 80)) {
+      e.preventDefault(); return false;
+    }
+    // Ctrl+Shift+U (소스보기 크롬)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'U' || e.key === 'u')) {
+      e.preventDefault(); return false;
+    }
+    // F7 (캐럿 브라우징)
+    if (e.key === 'F7' || e.keyCode === 118) {
+      e.preventDefault(); return false;
+    }
+  });
+
+  // 6. 개발자도구 감지 (크기 기반)
+  var devToolsOpen = false;
+  var threshold = 160;
+  function checkDevTools() {
+    var widthDiff = window.outerWidth - window.innerWidth > threshold;
+    var heightDiff = window.outerHeight - window.innerHeight > threshold;
+    if (widthDiff || heightDiff) {
+      if (!devToolsOpen) {
+        devToolsOpen = true;
+        document.body.innerHTML = '';
+        document.body.style.background = '#07060D';
+      }
+    } else {
+      devToolsOpen = false;
+    }
+  }
+  setInterval(checkDevTools, 1000);
+
+  // 7. 개발자도구 감지 (debugger 기반)
+  (function detectDebugger() {
+    var start = performance.now();
+    (function(){}).constructor('debugger')();
+    var end = performance.now();
+    if (end - start > 100) {
+      document.body.innerHTML = '';
+      document.body.style.background = '#07060D';
+    }
+    setTimeout(detectDebugger, 3000);
+  })();
+
+  // 8. console 메서드 무력화
+  var noop = function() {};
+  try {
+    Object.defineProperty(window, 'console', {
+      get: function() {
+        return {
+          log: noop, warn: noop, error: noop, info: noop,
+          debug: noop, dir: noop, table: noop, trace: noop,
+          assert: noop, count: noop, group: noop, groupEnd: noop,
+          time: noop, timeEnd: noop, clear: noop, profile: noop,
+          profileEnd: noop
+        };
+      },
+      set: noop
+    });
+  } catch(e) {}
+
+  // 9. 인쇄 차단
+  window.addEventListener('beforeprint', function() {
+    document.body.style.display = 'none';
+  });
+  window.addEventListener('afterprint', function() {
+    document.body.style.display = '';
+  });
+
+  // 10. iframe 삽입 차단
+  if (window.self !== window.top) {
+    window.top.location = window.self.location;
+  }
+})();
 </script>
 
 </body>
