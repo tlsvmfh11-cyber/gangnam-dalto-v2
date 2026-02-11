@@ -12,7 +12,13 @@
 <meta property="og:title" content="강남 달토 현장 9년, 매니저가 직접 밝히는 예약·초이스·가격의 속사정">
 <meta property="og:description" content="강남 달토 매니저가 직접 전하는 예약, 초이스, 가격 안내. 월 420팀 이상 응대 경험 기반. 010-2303-3778">
 <meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://gangnam-dalto.com/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gangnam-dalto.com/images/og-image.jpg">
+
+<link rel="preload" as="image" href="images/dalto-hero.webp" type="image/webp">
 <meta name="twitter:title" content="강남 달토 현장 9년, 매니저가 직접 밝히는 예약·초이스·가격의 속사정">
 <meta name="twitter:description" content="강남 달토 매니저가 직접 전하는 예약, 초이스, 가격 안내. 월 420팀 이상 응대 경험 기반. 010-2303-3778">
 
@@ -241,6 +247,19 @@ p { margin-bottom: 1.2rem; color: var(--text-primary); font-weight: 300; }
   background: var(--gradient-hero);
   position: relative;
   overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0.18;
+  filter: blur(1px) saturate(0.7);
 }
 .hero::before {
   content: '';
@@ -663,6 +682,41 @@ p { margin-bottom: 1.2rem; color: var(--text-primary); font-weight: 300; }
   50% { box-shadow: 0 0 0 10px rgba(168, 50, 98, 0); }
 }
 
+/* ===== Section Images ===== */
+.section-img-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 32px 0;
+  border: 1px solid var(--border-subtle);
+  position: relative;
+}
+.section-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(7,6,13,0.6) 100%);
+  pointer-events: none;
+}
+.section-img-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.section-img-wrap:hover img {
+  transform: scale(1.03);
+}
+.section-img-caption {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  z-index: 2;
+  font-size: 0.8rem;
+  color: var(--accent-gold-light);
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
 /* ===== Animations ===== */
 .fade-up {
   opacity: 0;
@@ -708,6 +762,13 @@ p { margin-bottom: 1.2rem; color: var(--text-primary); font-weight: 300; }
 
 <!-- ===== HERO SECTION ===== -->
 <section class="hero" id="top">
+  <div class="hero-bg">
+    <picture>
+      <source media="(max-width: 768px)" srcset="images/dalto-hero-mobile.webp" type="image/webp" width="768" height="1024">
+      <source srcset="images/dalto-hero.webp" type="image/webp" width="1920" height="2560">
+      <img src="images/dalto-hero.webp" alt="강남 달토 프리미엄 가라오케 대표 이미지" width="1920" height="2560" fetchpriority="high">
+    </picture>
+  </div>
   <div class="hero-content">
     <div class="hero-badge">현장 매니저 직접 작성</div>
     <h1>강남 달토<br>현장 9년, 매니저가 직접 밝히는 속사정</h1>
@@ -767,6 +828,15 @@ p { margin-bottom: 1.2rem; color: var(--text-primary); font-weight: 300; }
       <p>현재 매월 420팀 이상 응대하고 있고, 그중 74% 정도가 다시 찾아주시는 분들입니다. 이 숫자가 과장이 아니냐고 물으시는 분도 계신데, 저희 내부 예약 시스템 기록 기준입니다. 솔직히 주중에는 100팀이 안 되는 주도 있고, 주말에는 하루에 30팀이 몰리는 날도 있습니다.</p>
     </div>
 
+    <div class="section-img-wrap fade-up">
+      <picture>
+        <source media="(max-width: 480px)" srcset="images/dalto-about-sm.webp" type="image/webp" width="480" height="640">
+        <source srcset="images/dalto-about.webp" type="image/webp" width="800" height="1067">
+        <img src="images/dalto-about.webp" alt="강남 달토 달리는토끼 매장 분위기 및 매니저 서비스 안내" width="800" height="1067" loading="lazy">
+      </picture>
+      <span class="section-img-caption">GANGNAM DALTO</span>
+    </div>
+
     <div class="highlight-box fade-up">
       <p>강남 달토는 역삼역 3번 출구에서 도보 3분 거리에 있습니다. 주변에 비슷한 업종이 밀집해 있는데, 달리는토끼를 찾으시는 분들은 간판을 확인해 주세요. 처음 오시는 분은 전화 주시면 정확한 위치를 안내드립니다.</p>
     </div>
@@ -809,6 +879,15 @@ p { margin-bottom: 1.2rem; color: var(--text-primary); font-weight: 300; }
       <p>가능합니다. 평일은 당일 오후 5시까지 연락 주시면 대부분 잡힙니다. 문제는 주말인데, 금요일과 토요일은 늦어도 오후 2시 전에 전화해 주셔야 자리를 확보할 수 있습니다. 한 달에 한두 번 정도는 토요일 오후 12시에 이미 풀 부킹이 되는 날도 있습니다.</p>
       <h3>예약 변경이나 취소는 어떻게 하나요?</h3>
       <p>방문 예정 시간 기준 2시간 전까지 연락 주시면 위약금 없이 처리됩니다. 이 부분은 저희가 엄격하게 적용하고 있는 건 아니고, 상식적인 선에서 운영하고 있습니다. 다만, 노쇼가 두 번 이상 반복되면 향후 예약 시 선결제를 요청드릴 수 있으니 이 점만 양해 부탁드립니다.</p>
+    </div>
+
+    <div class="section-img-wrap fade-up">
+      <picture>
+        <source media="(max-width: 480px)" srcset="images/dalto-reservation-sm.webp" type="image/webp" width="480" height="640">
+        <source srcset="images/dalto-reservation.webp" type="image/webp" width="800" height="1067">
+        <img src="images/dalto-reservation.webp" alt="강남 달토 예약 시스템 전화 및 카카오톡 상담 안내" width="800" height="1067" loading="lazy">
+      </picture>
+      <span class="section-img-caption">RESERVATION</span>
     </div>
 
     <div class="highlight-box fade-up">
@@ -880,6 +959,15 @@ p { margin-bottom: 1.2rem; color: var(--text-primary); font-weight: 300; }
       <p>이전 방문 때 마음에 들었던 매니저가 있으시면, <a href="#reservation">예약 시</a> 지명을 요청하실 수 있습니다. 해당 매니저의 스케줄이 맞으면 배정해 드립니다. 지명비는 별도로 있는데 금액은 유동적이라 전화로 확인해 주세요. 지명 성공률은 평일 기준 85% 정도, 주말은 60~70% 정도입니다.</p>
     </div>
 
+    <div class="section-img-wrap fade-up">
+      <picture>
+        <source media="(max-width: 480px)" srcset="images/dalto-choice-system-sm.webp" type="image/webp" width="480" height="640">
+        <source srcset="images/dalto-choice-system.webp" type="image/webp" width="800" height="1067">
+        <img src="images/dalto-choice-system.webp" alt="강남 달토 초이스 시스템 매니저 선택 과정 안내" width="800" height="1067" loading="lazy">
+      </picture>
+      <span class="section-img-caption">CHOICE SYSTEM</span>
+    </div>
+
     <div class="highlight-box fade-up">
       <p>강남 달토 초이스 팁: 2인 이상 방문이시면 취향이 다를 수 있으니까, 누가 먼저 고를지 미리 정하고 오시는 게 좋습니다. 현장에서 양보하다가 시간만 지체되는 경우를 자주 봅니다.</p>
     </div>
@@ -934,6 +1022,15 @@ p { margin-bottom: 1.2rem; color: var(--text-primary); font-weight: 300; }
 
       <h3>결제 방법</h3>
       <p>현금, 신용카드, 체크카드, 계좌이체 전부 가능합니다. 분할 결제도 되니까, 일행끼리 나눠서 내셔도 됩니다. 영수증이 필요하신 분은 정산 시 말씀해 주세요.</p>
+    </div>
+
+    <div class="section-img-wrap fade-up">
+      <picture>
+        <source media="(max-width: 480px)" srcset="images/dalto-pricing-sm.webp" type="image/webp" width="480" height="640">
+        <source srcset="images/dalto-pricing.webp" type="image/webp" width="800" height="1067">
+        <img src="images/dalto-pricing.webp" alt="강남 달토 투명한 가격 구조 및 기본 구성 안내" width="800" height="1067" loading="lazy">
+      </picture>
+      <span class="section-img-caption">PRICING</span>
     </div>
 
     <div class="highlight-box fade-up">
